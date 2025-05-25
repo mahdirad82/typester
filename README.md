@@ -23,6 +23,10 @@ typester -n 30
 dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true
 ```
 
+## Build Status
+
+![Build and Release](https://github.com/mahdirad82/typester/actions/workflows/release.yml/badge.svg)
+
 ## 💥 Contribute
 Pull requests welcome! Add new modes, stats, or features.
 
