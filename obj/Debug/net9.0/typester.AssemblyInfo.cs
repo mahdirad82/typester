@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("typester")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c53a657c5f9a5295867f41723805870c436567c3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6ce2a669cd70b167c91850d7b56746f88c740b8b")]
 [assembly: System.Reflection.AssemblyProductAttribute("typester")]
 [assembly: System.Reflection.AssemblyTitleAttribute("typester")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
