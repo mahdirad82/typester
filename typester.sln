@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextAnalyzer", "TextAnalyzer.csproj", "{6600C8FA-685F-4027-8DAD-3B0F0E34F252}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "typester", "typester.csproj", "{6600C8FA-685F-4027-8DAD-3B0F0E34F252}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
