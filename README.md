@@ -6,7 +6,7 @@ A fun and simple console-based typing test built with .NET. Supports macOS and L
 ## 🚀 Install
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/typester/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/mahdirad82/typester/main/install.sh | bash
 ```
 
 Make sure `$HOME/.local/bin` is in your PATH.
