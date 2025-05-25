@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "w18s2E73okE=",
+  "dgSpecHash": "HU8NRVMRlCM=",
   "success": true,
-  "projectFilePath": "/Users/mahdi/RiderProjects/TextAnalyzer/TextAnalyzer.csproj",
+  "projectFilePath": "/Users/mahdi/RiderProjects/typester/typester.csproj",
   "expectedPackageFiles": [
     "/Users/mahdi/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/mahdi/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

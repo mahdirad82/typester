@@ -1,0 +1,105 @@
+# Project structure
+Typester/
+├── Program.cs
+├── SqliteDbContext.cs
+├── Typester.csproj
+├── install.sh
+├── .github/
+│   └── workflows/
+│       └── build.yml
+└── README.md
+
+# install.sh
+#!/bin/bash
+set -e
+
+DEST="$HOME/.local/bin"
+echo "📦 Installing Typester to $DEST..."
+mkdir -p "$DEST"
+
+OS=$(uname -s)
+case "$OS" in
+  Linux*)   PLATFORM="linux-x64";;
+  Darwin*)  PLATFORM="osx-x64";;
+  *)        echo "❌ Unsupported OS: $OS"; exit 1;;
+esac
+
+URL="https://github.com/YOUR_USERNAME/typester/releases/latest/download/typester-${PLATFORM}"
+
+curl -L -o "$DEST/typester" "$URL"
+chmod +x "$DEST/typester"
+
+echo "✅ Typester installed!"
+echo "👉 Run it using: typester -n 30"
+echo "👉 If not in PATH, add this to ~/.zshrc or ~/.bashrc:"
+echo 'export PATH="$HOME/.local/bin:$PATH"'
+
+# .github/workflows/build.yml
+name: Build Typester
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        runtime: [osx-x64, linux-x64]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Publish Typester
+        run: |
+          dotnet publish -c Release -r ${{ matrix.runtime }} --self-contained true -p:PublishSingleFile=true
+          mkdir -p dist/${{ matrix.runtime }}
+          cp bin/Release/net*/${{ matrix.runtime }}/publish/typester dist/${{ matrix.runtime }}/typester-${{ matrix.runtime }}
+
+      - name: Release with Binaries
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Typester ${{ github.ref_name }}
+          files: |
+            dist/osx-x64/typester-osx-x64
+            dist/linux-x64/typester-linux-x64
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# README.md
+# Typester 🧠⌨️
+
+A fun and simple console-based typing test built with .NET. Supports macOS and Linux.
+
+## 🚀 Install
+
+```bash
+curl -sSL https://raw.githubusercontent.com/YOUR_USERNAME/typester/main/install.sh | bash
+```
+
+Make sure `$HOME/.local/bin` is in your PATH.
+
+## 📝 Usage
+
+```bash
+typester -n 30
+```
+
+## 🛠️ Build Manually
+
+```bash
+dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishSingleFile=true
+```
+
+## 💥 Contribute
+Pull requests welcome! Add new modes, stats, or features.
+
+## 📄 License
+MIT

@@ -2386,12 +2386,13 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mahdi/RiderProjects/TextAnalyzer/TextAnalyzer.csproj",
-      "projectName": "TextAnalyzer",
-      "projectPath": "/Users/mahdi/RiderProjects/TextAnalyzer/TextAnalyzer.csproj",
+      "projectUniqueName": "/Users/mahdi/RiderProjects/typester/typester.csproj",
+      "projectName": "typester",
+      "projectPath": "/Users/mahdi/RiderProjects/typester/typester.csproj",
       "packagesPath": "/Users/mahdi/.nuget/packages/",
-      "outputPath": "/Users/mahdi/RiderProjects/TextAnalyzer/obj/",
+      "outputPath": "/Users/mahdi/RiderProjects/typester/obj/",
       "projectStyle": "PackageReference",
+      "UsingMicrosoftNETSdk": false,
       "configFilePaths": [
         "/Users/mahdi/.nuget/NuGet/NuGet.Config"
       ],
@@ -2417,8 +2418,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.100"
+      }
     },
     "frameworks": {
       "net9.0": {
