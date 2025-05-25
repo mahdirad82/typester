@@ -9,6 +9,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Content Include="words.db">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.16">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
