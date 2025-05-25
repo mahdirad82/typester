@@ -40,31 +40,6 @@ If not already executable, set the permission:
 chmod +x typester
 ```
 
-### 4. (Optional) Install Globally
-
-If you want to use `typester` from anywhere in your terminal, move it (and supporting files) to a directory in your `PATH`, such as `/usr/local/bin` (macOS/Linux):
-
-```sh
-# Move the binary
-sudo mv typester /usr/local/bin/
-
-# (macOS) Also move the SQLite library
-sudo mv libe_sqlite3.dylib /usr/local/bin/
-# (Linux) Also move the SQLite library
-sudo mv libe_sqlite3.so /usr/local/bin/
-
-# Copy the database file
-sudo mv words.db /usr/local/bin/
-```
-
-> ⚠️ The `words.db` database must be in the same directory as the `typester` executable.
-> For updates, remember to replace all necessary files.
-
-### 5. Run
-
-Now you can invoke `typester` from anywhere:
-
-
 ## 📝 Usage
 
 ```bash
