@@ -1,19 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "/Users/mahdi/RiderProjects/typester/typester.csproj": {}
+    "/Users/mahdi/typester/Untitled/typester.csproj": {}
   },
   "projects": {
-    "/Users/mahdi/RiderProjects/typester/typester.csproj": {
+    "/Users/mahdi/typester/Untitled/typester.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/mahdi/RiderProjects/typester/typester.csproj",
+        "projectUniqueName": "/Users/mahdi/typester/Untitled/typester.csproj",
         "projectName": "typester",
-        "projectPath": "/Users/mahdi/RiderProjects/typester/typester.csproj",
+        "projectPath": "/Users/mahdi/typester/Untitled/typester.csproj",
         "packagesPath": "/Users/mahdi/.nuget/packages/",
-        "outputPath": "/Users/mahdi/RiderProjects/typester/obj/",
+        "outputPath": "/Users/mahdi/typester/Untitled/obj/",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/Users/mahdi/.nuget/NuGet/NuGet.Config"
         ],
@@ -39,7 +38,8 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        }
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
