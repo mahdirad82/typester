@@ -13,7 +13,7 @@ case "$OS" in
   *)        echo "❌ Unsupported OS: $OS"; exit 1;;
 esac
 
-URL="https://github.com/YOUR_USERNAME/typester/releases/latest/download/typester-${PLATFORM}"
+URL="https://github.com/mahdirad82/typester/releases/latest/download/typester-${PLATFORM}"
 
 curl -L -o "$DEST/typester" "$URL"
 chmod +x "$DEST/typester"
