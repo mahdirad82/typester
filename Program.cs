@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using TextAnalyzer.Data;
 
@@ -28,6 +28,7 @@ for (var j = 0; j < args.Length; j++)
         }
     }
 }
+
 Console.CursorVisible = false;
 
 while (true)
@@ -49,15 +50,14 @@ while (true)
 
 return;
 
-static bool RunTypingTest(SqliteDbContext dbContext, int wordCount = 20)
+static bool RunTypingTest(SqliteDbContext dbContext, int wordCount)
 {
     var wordsPerLine = (int)Math.Ceiling(Math.Sqrt(wordCount));
     var words = dbContext.Words
         .AsNoTracking()
         .Where(w =>
             w.Word.Length >= 3 &&
-            w.Word.Length <= 6 &&
-            (w.Pos == "n" || w.Pos == "a" || w.Pos == "s" || w.Pos == "v"))
+            w.Word.Length <= 6)
         .OrderBy(w => EF.Functions.Random())
         .Take(wordCount)
         .Select(w => w.Word.ToLower())
@@ -68,7 +68,7 @@ static bool RunTypingTest(SqliteDbContext dbContext, int wordCount = 20)
         words.Select((w, i) =>
             i > 0 && i % wordsPerLine == 0 ? $"\n{w}" : w));
 
-    
+
     var charsAndPoss = WriteCenteredAndGetPositions(text);
     var charToCorrectness = new Dictionary<int, bool>();
     for (var j = 0; j < charsAndPoss.Count; j++)
@@ -77,6 +77,7 @@ static bool RunTypingTest(SqliteDbContext dbContext, int wordCount = 20)
     var stopWatch = new Stopwatch();
     var isStopWatchRunning = false;
     var i = 0;
+    var mistakes = 0;
 
     while (i < charsAndPoss.Count)
     {
@@ -113,7 +114,7 @@ static bool RunTypingTest(SqliteDbContext dbContext, int wordCount = 20)
             i--;
             continue;
         }
-        
+
         Console.SetCursorPosition(charsAndPoss[i].Left, charsAndPoss[i].Top);
         if (input.KeyChar == charsAndPoss[i].Char)
         {
@@ -124,6 +125,7 @@ static bool RunTypingTest(SqliteDbContext dbContext, int wordCount = 20)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             charToCorrectness[i] = false;
+            mistakes++;
         }
 
         if (char.IsWhiteSpace(charsAndPoss[i].Char))
@@ -132,6 +134,7 @@ static bool RunTypingTest(SqliteDbContext dbContext, int wordCount = 20)
             {
                 Console.BackgroundColor = ConsoleColor.Red;
                 charToCorrectness[i] = false;
+                mistakes++;
             }
             else
             {
@@ -145,26 +148,25 @@ static bool RunTypingTest(SqliteDbContext dbContext, int wordCount = 20)
     }
 
     stopWatch.Stop();
-    var mistakes = charToCorrectness.Count(w => !w.Value);
     var corrects = charToCorrectness.Count(w => w.Value);
-
-    Console.ForegroundColor = ConsoleColor.DarkGray;
+    
     WriteCenteredAndGetPositions(
         $"""
-         Speed: {corrects * 60 / (stopWatch.Elapsed.Seconds * 5)
+         Speed: {Math.Round(corrects * 60 / (stopWatch.Elapsed.TotalSeconds * 5), 2)
          }WPM(Word Per Minute)
 
-         Accuracy: {Math.Round(corrects / (double)charsAndPoss.Count * 100, 2)}%
+         Accuracy: {Math.Round((corrects - mistakes) / (double)charsAndPoss.Count * 100, 2)}%
 
          Mistakes: {mistakes}
 
-         """, animationDelayMs: 20);
+         """, animationDelayMs: 20, foregroundColor: ConsoleColor.Cyan);
 
     return false;
 }
 
 static List<(char Char, int Left, int Top)> WriteCenteredAndGetPositions(
-    string textToCenter, bool clearConsole = true, bool animate = true, int animationDelayMs = 5)
+    string textToCenter, bool clearConsole = true, bool animate = true,
+    int animationDelayMs = 2, ConsoleColor foregroundColor = ConsoleColor.DarkGray)
 {
     var positions = new List<(char Char, int Left, int Top)>();
 
@@ -173,8 +175,8 @@ static List<(char Char, int Left, int Top)> WriteCenteredAndGetPositions(
 
     if (clearConsole)
         Console.Clear();
-    
-    ShowRestartHint();
+
+    ShowRestartHint(foregroundColor);
 
     var lines = textToCenter.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
     var windowWidth = Console.WindowWidth;
@@ -213,7 +215,7 @@ static List<(char Char, int Left, int Top)> WriteCenteredAndGetPositions(
             Console.Error.WriteLine($"\nError writing to console: {ex.Message}");
         }
     }
-    
+
 
     // Move cursor below the text
     var finalTop = Math.Min(startTop + lines.Length, windowHeight - 1);
@@ -221,12 +223,12 @@ static List<(char Char, int Left, int Top)> WriteCenteredAndGetPositions(
 
     return positions;
 }
-static void ShowRestartHint()
+
+static void ShowRestartHint(ConsoleColor foregroundColor)
 {
     var bottomRow = Console.WindowHeight - 1;
     Console.SetCursorPosition(0, bottomRow);
     Console.ForegroundColor = ConsoleColor.DarkCyan;
     Console.Write("Press Ctrl + r to restart at any time".PadRight(Console.WindowWidth));
-    Console.ForegroundColor = ConsoleColor.DarkGray;
+    Console.ForegroundColor = foregroundColor;
 }
-

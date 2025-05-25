@@ -1,7 +1,7 @@
 # README.md
 # Typester 🧠⌨️
 
-A fun and simple console-based typing test built with .NET. Supports macOS and Linux.
+A fun and simple console-based typing test built with .NET.
 
 ## 🚀 Install
 
