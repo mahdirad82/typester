@@ -14,16 +14,6 @@ Go to the [Releases](https://github.com/mahdirad82/typester/releases) page and d
 
 ### 2. Extract
 
-Example for macOS/Linux:
-
-```sh
-# For ZIP (macOS)
-unzip typester-macos-x64.zip
-
-# For ZIP (Linux)
-unzip typester-linux-x64.zip   
-```
-
 You should see at least:
 
 - `typester` (the CLI executable)
